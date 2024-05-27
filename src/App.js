@@ -1,26 +1,28 @@
-import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React from "react";
+import Header from "./layouts/Header";
+import Footer from "./layouts/Footer";
+import JobHuntingStatuses from "./components/JobHuntingStatuses";
+import Container from "react-bootstrap/Container";
+import { Routes, Route} from "react-router-dom";
 
 function App() {
-  const [greeting, setGreeting] = useState("")
-
-  useEffect(() => {
-    (async() => {
-      try {
-        const response = await axios.get("http://43.207.6.215/api/greeting")
-        setGreeting(response.data.greeting)
-      } catch (error) {
-        console.error(error)
-      }
-    })()
-  }, [])
-
   return (
     <div className="App">
-      <p>{greeting}</p>
+      <Header />
+
+      <main>
+        <Container fluid="md">
+          <Routes>
+            <Route
+              path="/user/:id"
+              element={<JobHuntingStatuses/>}
+            />
+          </Routes>
+        </Container>
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
 
 export default App;
-
